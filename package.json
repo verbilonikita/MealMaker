@@ -1,0 +1,11 @@
+{
+  "name": "mealmaker",
+  "version": "1.0.0",
+  "description": "find your favourite recipe",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nikita Verbilo",
+  "license": "ISC"
+}

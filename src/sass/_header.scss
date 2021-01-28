@@ -5,6 +5,28 @@
   align-items: center;
   justify-content: space-between;
 
+  .logo {
+    margin: auto;
+    i {
+      font-size: 4rem;
+      display: inline;
+      background: $gradient;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke-width: 0.5px;
+      -webkit-text-stroke-color: black;
+      padding-right: 10px;
+    }
+
+    h3 {
+      @extend i;
+      font-family: 'Amatic SC', sans-serif;
+      @media only screen and (max-width: 720px) {
+        display: none;
+      }
+    }
+  }
+
   &__logo {
     margin-left: 4rem;
     height: 4.6rem;

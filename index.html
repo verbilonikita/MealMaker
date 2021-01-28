@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- different meta tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="src/img/favicon.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
 
-    <link rel="stylesheet" href="src/sass/main.scss" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap"
+      rel="stylesheet"
+    />
+    <!-- title + icon -->
+    <link rel="shortcut icon" href="src/img/bla.png" type="image/x-icon" />
+    <title>MealMaker - Find your favourite meal recipe</title>
+    <!-- css + js -->
+    <link href="index.css" rel="stylesheet" />
     <script defer src="src/js/controller.js"></script>
-
-    <title>forkify // Search over 1,000,000 recipes</title>
   </head>
 
   <body>
     <div class="container">
       <header class="header">
-        <img src="src/img/logo.png" alt="Logo" class="header__logo" />
+        <div class="logo">
+          <i class="fas fa-pizza-slice"></i>
+          <h3>MealMaker</h3>
+        </div>
         <form class="search">
           <input
             type="text"
@@ -120,17 +137,6 @@
             </svg>
           </button> -->
         </div>
-
-        <p class="copyright">
-          &copy; Copyright by
-          <a
-            class="twitter-link"
-            target="_blank"
-            href="https://twitter.com/jonasschmedtman"
-            >Jonas Schmedtmann</a
-          >. Use for learning or your portfolio. Don't use to teach. Don't claim
-          as your own.
-        </p>
       </div>
 
       <div class="recipe">
@@ -142,12 +148,6 @@
           </div>
           <p>Start by searching for a recipe or an ingredient. Have fun!</p>
         </div>
-
-        <!-- <div class="spinner">
-          <svg>
-            <use href="src/img/icons.svg#icon-loader"></use>
-          </svg>
-        </div> -->
 
         <!-- <div class="error">
             <div>

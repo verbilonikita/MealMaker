@@ -1,5 +1,6 @@
 .recipe {
-  background-color: $color-grey-light-1;
+  // background-color: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(10px);
 
   ///////////
   // FIGURE
@@ -22,7 +23,7 @@
         $color-grad-1,
         $color-grad-2
       );
-      opacity: 0.6;
+      opacity: 0.5;
     }
   }
 

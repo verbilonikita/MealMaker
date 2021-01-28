@@ -1,12 +1,12 @@
 // $color-primary: #f59a83;
 $color-primary: #f38e82;
-$color-grad-1: #fbdb89;
+$color-grad-1: #9bf0d6;
 $color-grad-2: #f48982;
 
 $color-grey-light-1: #f9f5f3; // Light background
 $color-grey-light-2: #f2efee; // Light lines
 $color-grey-light-3: #d3c7c3; // Light text (placeholder)
-$color-grey-dark-1: #615551; // Normal text
+$color-grey-dark-1: #312b2a; // Normal text
 $color-grey-dark-2: #918581; // Lighter text
 
 $gradient: linear-gradient(to right bottom, $color-grad-1, $color-grad-2);
@@ -29,7 +29,7 @@ $bp-smallest: 31.25em; // 500px
 
 html {
   box-sizing: border-box;
-  font-size: 62.5%;
+  font-size: 60%;
 
   @media only screen and (max-width: $bp-medium) {
     font-size: 50%;
@@ -41,6 +41,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   color: $color-grey-dark-1;
+  background-color: opacity(0.3);
   background-image: $gradient;
   background-size: cover;
   background-repeat: no-repeat;
@@ -51,11 +52,12 @@ body {
   max-width: 120rem;
   min-height: 117rem;
   margin: 4vw auto;
-  background-color: #fff;
-  border-radius: 9px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.2);
-
+  opacity: 1;
   display: grid;
   grid-template-rows: 10rem minmax(100rem, auto);
   grid-template-columns: 1fr 2fr;
