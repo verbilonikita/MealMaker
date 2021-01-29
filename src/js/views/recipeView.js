@@ -1,16 +1,11 @@
-class RecipeView {
+import View from './view.js';
+
+class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
   _data;
 
-  render(data) {
-    this._data = data;
-    const markup = this._generateMarkup(data);
-    this._clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
-
-  _clear() {
-    this._parentElement.innerHTML = '';
+  addHandlerRender(handler) {
+    ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   }
 
   _generateMarkup(recipe) {
@@ -54,7 +49,6 @@ class RecipeView {
     <ul class="recipe__ingredient-list">
     ${recipe.ingredients
       .map(ing => {
-        console.log(ing);
         return `
       <li class="recipe__ingredient">
         <svg class="recipe__icon">

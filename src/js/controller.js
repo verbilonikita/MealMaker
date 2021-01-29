@@ -1,46 +1,65 @@
 import * as model from './model.js';
 import RecipeView from './views/recipeView.js';
+import SearchView from './views/searchView.js';
+import ResultsView from './views/resultsView.js';
+import Pagination from './views/paginationView.js';
+
+//Declaring Variables
 
 const recipeContainer = document.querySelector('.recipe');
 
-const timeout = function (s) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error(`Request took too long! Timeout after ${s} second`));
-    }, s * 1000);
-  });
-};
-
-// https://forkify-api.herokuapp.com/v2
-
-///////////////////////////////////////
-
-const renderSpinner = function (parentEl) {
-  const markup = `
- <div class="spinner">
-          <svg>
-            <use href="src/img/icons.svg#icon-loader"></use>
-          </svg>
-  </div>
-  `;
-  recipeContainer.innerHTML = '';
-  parentEl.insertAdjacentHTML('afterbegin', markup);
-};
+//Rendering Recipe
 
 const showRecipe = async function () {
   try {
-    // const id = window.location.hash.slice(1);
-    const id = 47746;
-    // if (!id) return;
+    //check whether it has hash
+    const id = window.location.hash.slice(1);
+    if (!id) return;
     //1. Loading Recipies
-    renderSpinner(recipeContainer);
+    RecipeView.renderSpinner();
     const recipe = await model.loadRecipe(id);
-    RecipeView.render(recipe);
-
     //2. Rendering Recipe
+    RecipeView.render(recipe);
   } catch (err) {
-    console.error(err);
+    RecipeView.renderError(err);
   }
 };
 
-['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe));
+// Rendering Search
+
+const searchResults = async function () {
+  try {
+    // render Spinner
+    ResultsView.renderSpinner();
+    // search for input value
+    const query = SearchView.getQuery();
+    if (!query) return;
+    //insert input value
+    await model.loadResults(query);
+    SearchView.clearInput();
+    //render value with input value
+    ResultsView.render(model.getSeachResulsPage());
+    // render initial page buttons
+    Pagination.render(model.state.search);
+  } catch (err) {
+    ResultsView.renderError();
+  }
+};
+
+//Listners
+
+const controlPagination = function (page) {
+  ResultsView.render(model.getSeachResulsPage(page));
+  model.state.search.page = page;
+  console.log(model.state);
+  Pagination.render(model.state.search);
+};
+
+const controlServings = function () {};
+
+const init = function () {
+  RecipeView.addHandlerRender(showRecipe);
+  SearchView.addHandlerSearch(searchResults);
+  Pagination.addHandlerClick(controlPagination);
+};
+init();
