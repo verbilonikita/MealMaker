@@ -8,6 +8,14 @@ class RecipeView extends View {
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   }
 
+  addHandleraddBookmark(handler) {
+    this._parentElement.addEventListener('click', e => {
+      const btn = e.target.closest('.btn--bookmark');
+      if (!btn) return;
+      handler();
+    });
+  }
+
   _generateMarkup(recipe) {
     return `
     <figure class="recipe__fig">
@@ -37,9 +45,11 @@ class RecipeView extends View {
         <use href="src/img/icons.svg#icon-user"></use>
       </svg>
     </div>
-    <button class="btn--round">
+    <button class="btn--round btn--bookmark">
       <svg class="">
-        <use href="src/img/icons.svg#icon-bookmark-fill"></use>
+        <use href="src/img/icons.svg#icon-bookmark${
+          this._data.bookmarked === true ? '-fill' : ''
+        }"></use>
       </svg>
     </button>
     </div>

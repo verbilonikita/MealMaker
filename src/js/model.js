@@ -9,12 +9,20 @@ export const state = {
     resultsPerPage: config.resultsPerPage,
     page: 1,
   },
+  bookmarks: [],
+};
+
+const persistBookmarks = function () {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 };
 
 export const loadRecipe = async function (id) {
   try {
     const data = await helpers.getJSON(`${config.API_URL}${id}`);
-    return data.recipe;
+    state.recipe = data.recipe;
+    if (state.bookmarks.some(bookmark => bookmark.recipe_id === id))
+      state.recipe.bookmarked = true;
+    else state.recipe.bookmarked = false;
   } catch (err) {
     throw err;
   }
@@ -37,3 +45,30 @@ export const getSeachResulsPage = function (page = 1) {
 
   return state.search.results.slice(start, end);
 };
+
+export const addBookmark = function (recipe) {
+  //Add bookmark to state object
+  state.bookmarks.push(recipe);
+  //mark current recipe as booked
+  if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+
+  persistBookmarks();
+};
+
+export const deleteBookmark = function (id) {
+  //delete bookmark
+  const index = state.bookmarks.findIndex(el => el.recipe_id === id);
+  state.bookmarks.splice(index, 1);
+
+  //mark as not bookmarked
+  if (id === state.recipe.recipe_id) state.recipe.bookmarked = false;
+
+  persistBookmarks();
+};
+
+const init = function () {
+  const storage = localStorage.getItem('bookmarks');
+  if (storage) state.bookmarks = JSON.parse(storage);
+};
+
+init();

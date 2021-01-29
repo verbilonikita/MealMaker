@@ -3,6 +3,8 @@ import RecipeView from './views/recipeView.js';
 import SearchView from './views/searchView.js';
 import ResultsView from './views/resultsView.js';
 import Pagination from './views/paginationView.js';
+import BookmarksView from './views/bookmarksView.js';
+import bookmarksView from './views/bookmarksView.js';
 
 //Declaring Variables
 
@@ -17,7 +19,9 @@ const showRecipe = async function () {
     if (!id) return;
     //1. Loading Recipies
     RecipeView.renderSpinner();
-    const recipe = await model.loadRecipe(id);
+    bookmarksView.render(model.state.bookmarks);
+    await model.loadRecipe(id);
+    const recipe = model.state.recipe;
     //2. Rendering Recipe
     RecipeView.render(recipe);
   } catch (err) {
@@ -37,6 +41,7 @@ const searchResults = async function () {
     //insert input value
     await model.loadResults(query);
     SearchView.clearInput();
+    model.state.search.page = 1;
     //render value with input value
     ResultsView.render(model.getSeachResulsPage());
     // render initial page buttons
@@ -46,20 +51,31 @@ const searchResults = async function () {
   }
 };
 
-//Listners
-
 const controlPagination = function (page) {
   ResultsView.render(model.getSeachResulsPage(page));
   model.state.search.page = page;
-  console.log(model.state);
   Pagination.render(model.state.search);
 };
 
-const controlServings = function () {};
+const controlBookmark = function () {
+  if (model.state.recipe.bookmarked === false)
+    model.addBookmark(model.state.recipe);
+  else model.deleteBookmark(model.state.recipe.recipe_id);
+  RecipeView.render(model.state.recipe);
+
+  // render Bookmarks
+  BookmarksView.render(model.state.bookmarks);
+};
+
+const controlBookmarks = function () {
+  bookmarksView.render(model.state.bookmarks);
+};
 
 const init = function () {
   RecipeView.addHandlerRender(showRecipe);
   SearchView.addHandlerSearch(searchResults);
   Pagination.addHandlerClick(controlPagination);
+  RecipeView.addHandleraddBookmark(controlBookmark);
+  bookmarksView.addHandlerRender(controlBookmarks);
 };
 init();
