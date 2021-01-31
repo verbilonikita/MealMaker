@@ -4,8 +4,11 @@
   "description": "find your favourite recipe",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile-sass": "node-sass ./src/sass/main.scss index.css -w"
   },
   "author": "Nikita Verbilo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "node-sass": "^5.0.0"
+  }
 }

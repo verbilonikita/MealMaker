@@ -66,6 +66,24 @@ export const deleteBookmark = function (id) {
   persistBookmarks();
 };
 
+// Not in Use Anymore
+// export const uploadRecipe = function (newRecipe) {
+//   const ingredients = Object.entries(newRecipe).filter(
+//     el => el[0].includes('ingredient') && el[1] !== ''
+//   );
+//   const recipe = {
+//     title: newRecipe.title,
+//     image_url: newRecipe.image,
+//     publisher: newRecipe.publisher,
+//     servings: newRecipe.servings,
+//     publisher_url: newRecipe.sourceUrl,
+//     ingredients: ingredients,
+//     cooking_time: newRecipe.cooking_time,
+//   };
+
+//   console.log(recipe);
+// };
+
 const init = function () {
   const storage = localStorage.getItem('bookmarks');
   if (storage) state.bookmarks = JSON.parse(storage);

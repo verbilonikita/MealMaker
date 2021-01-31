@@ -3,8 +3,9 @@ import RecipeView from './views/recipeView.js';
 import SearchView from './views/searchView.js';
 import ResultsView from './views/resultsView.js';
 import Pagination from './views/paginationView.js';
-import BookmarksView from './views/bookmarksView.js';
 import bookmarksView from './views/bookmarksView.js';
+//not in use anymore
+// import addRecipeView from './views/addRecipeView.js';
 
 //Declaring Variables
 
@@ -71,11 +72,18 @@ const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+//not in use anymore
+// const addRecipe = function (newRecipe) {
+//   model.uploadRecipe(newRecipe);
+// };
+
 const init = function () {
   RecipeView.addHandlerRender(showRecipe);
   SearchView.addHandlerSearch(searchResults);
   Pagination.addHandlerClick(controlPagination);
   RecipeView.addHandleraddBookmark(controlBookmark);
   bookmarksView.addHandlerRender(controlBookmarks);
+  //not in use anymore
+  // addRecipeView.addHandlerUpload(addRecipe);
 };
 init();
