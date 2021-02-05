@@ -64,7 +64,6 @@
   padding: 0.8rem 1.2rem;
   border-radius: 10rem;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   transition: all 0.2s;
@@ -116,39 +115,6 @@
     height: 2.5rem;
     width: 2.5rem;
     fill: #fff;
-  }
-}
-
-.btn--tiny {
-  height: 2rem;
-  width: 2rem;
-  border: none;
-  background: none;
-  cursor: pointer;
-
-  svg {
-    height: 100%;
-    width: 100%;
-    fill: $color-primary;
-    transition: all 0.3s;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:hover svg {
-    fill: $color-grad-2;
-    transform: translateY(-1px);
-  }
-
-  &:active svg {
-    fill: $color-grad-2;
-    transform: translateY(0);
-  }
-
-  &:not(:last-child) {
-    margin-right: 0.3rem;
   }
 }
 

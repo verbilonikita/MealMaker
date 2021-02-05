@@ -1,10 +1,16 @@
 export default class View {
+  //initial parent class
+
+  //rendering data from data passed in
+
   render(data) {
     this._data = data;
     const markup = this._generateMarkup(data);
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
+
+  //spinner
 
   renderSpinner() {
     const markup = `
@@ -18,9 +24,13 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  //clearing parent element
+
   _clear() {
     this._parentElement.innerHTML = '';
   }
+
+  //rendering error
 
   renderError(message = this._message) {
     const markup = `

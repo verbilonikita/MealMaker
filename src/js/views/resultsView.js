@@ -5,10 +5,14 @@ class Results extends View {
   _data;
   _message = 'Please choose another food type!';
 
+  //generate markup for all items from that 1 item and joining them into 1 big markup
+
   _generateMarkup() {
     // console.log(this._data.map(this._generateMarkupPreview).join(''));
     return this._data.map(this._generateMarkupPreview).join('');
   }
+
+  //generating markup for 1 item
 
   _generateMarkupPreview(result) {
     return `

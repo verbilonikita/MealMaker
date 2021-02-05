@@ -4,9 +4,13 @@ class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
   _data;
 
+  //event handlers for load and hashchange
+  // if has changed - show recipe, if on load it has hash - show recipe
   addHandlerRender(handler) {
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   }
+
+  // if bookmark button was clicked then control bookmark function is triggered
 
   addHandleraddBookmark(handler) {
     this._parentElement.addEventListener('click', e => {
@@ -15,6 +19,8 @@ class RecipeView extends View {
       handler();
     });
   }
+
+  //generating markup
 
   _generateMarkup(recipe) {
     return `

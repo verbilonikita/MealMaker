@@ -1,15 +1,11 @@
-import * as model from './model.js';
-import RecipeView from './views/recipeView.js';
-import SearchView from './views/searchView.js';
-import ResultsView from './views/resultsView.js';
-import Pagination from './views/paginationView.js';
-import bookmarksView from './views/bookmarksView.js';
+import * as model from './model.js'; // used for state and business logic
+import RecipeView from './views/recipeView.js'; //render recipe
+import SearchView from './views/searchView.js'; //render search
+import ResultsView from './views/resultsView.js'; //render results
+import Pagination from './views/paginationView.js'; //render pagination
+import BookmarksView from './views/bookmarksView.js'; //render bookmarks
 //not in use anymore
 // import addRecipeView from './views/addRecipeView.js';
-
-//Declaring Variables
-
-const recipeContainer = document.querySelector('.recipe');
 
 //Rendering Recipe
 
@@ -18,10 +14,14 @@ const showRecipe = async function () {
     //check whether it has hash
     const id = window.location.hash.slice(1);
     if (!id) return;
-    //1. Loading Recipies
+    //1. Loading Recipe
+    // rendering spinner
     RecipeView.renderSpinner();
-    bookmarksView.render(model.state.bookmarks);
+    // if bookmarks - create bookmarks
+    BookmarksView.render(model.state.bookmarks);
+    // creating a state object based on has value of recipe
     await model.loadRecipe(id);
+    // pushing current recipe to state recipe
     const recipe = model.state.recipe;
     //2. Rendering Recipe
     RecipeView.render(recipe);
@@ -39,11 +39,13 @@ const searchResults = async function () {
     // search for input value
     const query = SearchView.getQuery();
     if (!query) return;
-    //insert input value
+    // search by input value
     await model.loadResults(query);
+    //clear input field
     SearchView.clearInput();
+    // page 1 must be rendered
     model.state.search.page = 1;
-    //render value with input value
+    //render search recipe previews number depends on how much page allows to render
     ResultsView.render(model.getSeachResulsPage());
     // render initial page buttons
     Pagination.render(model.state.search);
@@ -52,11 +54,16 @@ const searchResults = async function () {
   }
 };
 
+// control pagination (back forth)
 const controlPagination = function (page) {
   ResultsView.render(model.getSeachResulsPage(page));
   model.state.search.page = page;
   Pagination.render(model.state.search);
 };
+
+// if recipe isn't bookmarked push it to bookmark state
+// if it is bookmarked then delete it from the bookmarked array
+// also render bookmark in the bookmark field
 
 const controlBookmark = function () {
   if (model.state.recipe.bookmarked === false)
@@ -68,22 +75,26 @@ const controlBookmark = function () {
   BookmarksView.render(model.state.bookmarks);
 };
 
+// on load renders bookmarks that were in bookmarks state (those returned from local storage)
+
 const controlBookmarks = function () {
-  bookmarksView.render(model.state.bookmarks);
+  BookmarksView.render(model.state.bookmarks);
 };
 
-//not in use anymore
-// const addRecipe = function (newRecipe) {
-//   model.uploadRecipe(newRecipe);
-// };
+// Initializing addEventListners for all interactive parts
 
 const init = function () {
   RecipeView.addHandlerRender(showRecipe);
   SearchView.addHandlerSearch(searchResults);
   Pagination.addHandlerClick(controlPagination);
   RecipeView.addHandleraddBookmark(controlBookmark);
-  bookmarksView.addHandlerRender(controlBookmarks);
+  BookmarksView.addHandlerRender(controlBookmarks);
   //not in use anymore
   // addRecipeView.addHandlerUpload(addRecipe);
 };
 init();
+
+//not in use anymore
+// const addRecipe = function (newRecipe) {
+//   model.uploadRecipe(newRecipe);
+// };

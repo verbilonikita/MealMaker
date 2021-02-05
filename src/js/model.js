@@ -16,10 +16,12 @@ const persistBookmarks = function () {
   localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 };
 
+// importing promise with relevant object and storing it in state
 export const loadRecipe = async function (id) {
   try {
     const data = await helpers.getJSON(`${config.API_URL}${id}`);
     state.recipe = data.recipe;
+    // if already have bookmarks on render and it is equal to curr ID - marking it as bookmarked
     if (state.bookmarks.some(bookmark => bookmark.recipe_id === id))
       state.recipe.bookmarked = true;
     else state.recipe.bookmarked = false;
@@ -27,6 +29,8 @@ export const loadRecipe = async function (id) {
     throw err;
   }
 };
+
+// loading all results with specific query and storing in state
 
 export const loadResults = async function (query) {
   try {
@@ -38,6 +42,8 @@ export const loadResults = async function (query) {
     throw err;
   }
 };
+
+// creating selected number of queries per page and returns them
 
 export const getSeachResulsPage = function (page = 1) {
   const start = (page - 1) * state.search.resultsPerPage;
@@ -66,6 +72,15 @@ export const deleteBookmark = function (id) {
   persistBookmarks();
 };
 
+// parsing local storage bookmarks back to objects and placing it into bookmarks
+
+const init = function () {
+  const storage = localStorage.getItem('bookmarks');
+  if (storage) state.bookmarks = JSON.parse(storage);
+};
+
+init();
+
 // Not in Use Anymore
 // export const uploadRecipe = function (newRecipe) {
 //   const ingredients = Object.entries(newRecipe).filter(
@@ -83,10 +98,3 @@ export const deleteBookmark = function (id) {
 
 //   console.log(recipe);
 // };
-
-const init = function () {
-  const storage = localStorage.getItem('bookmarks');
-  if (storage) state.bookmarks = JSON.parse(storage);
-};
-
-init();
