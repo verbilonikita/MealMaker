@@ -4,7 +4,6 @@ class PreviewView extends View {
   _parentElement = '';
 
   _generateMarkup() {
-    // console.log(this._data.map(this._generateMarkupPreview).join(''));
     return this._data.map(this._generateMarkupPreview).join('');
   }
 
