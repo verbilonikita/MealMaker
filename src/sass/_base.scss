@@ -41,7 +41,6 @@ body {
   font-weight: 400;
   line-height: 1.6;
   color: $color-grey-dark-1;
-  background-color: opacity(0.3);
   background-image: $gradient;
   background-size: cover;
   background-repeat: no-repeat;
@@ -52,12 +51,11 @@ body {
   max-width: 120rem;
   min-height: 110rem;
   margin: 4vw auto;
-  background-color: rgba(255, 255, 255, 0.911);
+  background-color: rgba(255, 255, 255, 0.568);
   backdrop-filter: blur(10px);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.2);
-  opacity: 1;
   display: grid;
   grid-template-rows: 10rem minmax(100rem, auto);
   grid-template-columns: 1fr 2fr;
