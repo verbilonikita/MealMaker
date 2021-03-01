@@ -1,5 +1,7 @@
 # MealMaker App (very simple) using HTML, SCSS and vanilla JS.
 
+https://clever-panini-5fa850.netlify.app/
+
 I created a simple interactive app (recipe-checker) that provides recipe on certain request.
 This requests are:
 
