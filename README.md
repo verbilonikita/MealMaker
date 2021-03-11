@@ -1,4 +1,4 @@
-# MealMaker App (very simple) using HTML, SCSS and vanilla JS. REST API 
+# MealMaker App using HTML, SCSS and vanilla JS. REST API 
 
 https://clever-panini-5fa850.netlify.app/
 
